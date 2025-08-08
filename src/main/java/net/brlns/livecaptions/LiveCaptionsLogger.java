@@ -58,6 +58,10 @@ import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import net.sourceforge.tess4j.util.LoadLibs;
 import org.apache.commons.text.similarity.JaroWinklerDistance;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.io.FileOutputStream;
+
 
 /**
  * LiveCaptionsLogger
@@ -1008,12 +1012,21 @@ public class LiveCaptionsLogger {
         }
 
         // Open and close immediatelly so we don't keep a lock on the file
-        try (FileWriter fw = new FileWriter(currentFile, true);
+        /* try (FileWriter fw = new FileWriter(currentFile, true);
              PrintWriter pw = new PrintWriter(fw)) {
             pw.println(line);
         } catch (IOException e) {// Shenanigans happened
             handleException(e);
+        } */
+		
+		/* maybe this works with japanese */
+		try (OutputStreamWriter fw = new OutputStreamWriter(new FileOutputStream(currentFile, true), StandardCharsets.UTF_8);
+		PrintWriter pw = new PrintWriter(fw)) {
+			pw.println(line);
+		} catch (IOException e) {// Shenanigans happened
+            handleException(e);
         }
+		
     }
 
     /**
