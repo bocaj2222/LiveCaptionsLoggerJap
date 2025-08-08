@@ -83,3 +83,9 @@ task replaceJavaExeInBatchFiles {
 tasks.named('startShadowScripts') {
     finalizedBy(replaceJavaExeInBatchFiles)
 }
+
+processResources {
+    from('src/main/tessdata') {
+        into 'tessdata'
+    }
+}
