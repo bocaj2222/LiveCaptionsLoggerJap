@@ -127,6 +127,6 @@ public class Settings {
      * language training files.
      */
     @JsonProperty("TesseractLanguage")
-    private String tessLanguage = "eng";
+    private String tessLanguage = "jpn";
 
 }
